@@ -1,0 +1,18 @@
+[
+  {
+    "ProjectType": "Software Development",
+    "StartDate": "2024-06-10T00:00:00",
+    "EndDate": null,
+    "ProjectManagerId": 1,
+    "Comment": "This project aims to develop a new application.",
+    "Status": "Active"
+  },
+  {
+    "ProjectType": "Marketing Campaign",
+    "StartDate": "2024-07-01T00:00:00",
+    "EndDate": "2024-09-30T00:00:00",
+    "ProjectManagerId": 2,
+    "Comment": "Launching a new marketing campaign for our product.",
+    "Status": "Active"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "EmployeeId": 1,
+    "AbsenceReason": "Vacation",
+    "StartDate": "2024-07-01",
+    "EndDate": "2024-07-10",
+    "Comment": "Family vacation",
+    "Status": "New"
+  }
+]

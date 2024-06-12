@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "FullName": "John Doe",
+    "Subdivision": "HR Department",
+    "Position": "Manager",
+    "Status": "Active",
+    "PeoplePartnerId": 2,
+    "OutOfOfficeBalance": 20,
+    "Photo": "http://example.com/photo.jpg",
+    "LeaveRequests": [],
+    "ApprovalRequests": []
+  },
+  {
+    "Id": 2,
+    "FullName": "Jane Smith",
+    "Subdivision": "Marketing Department",
+    "Position": "Coordinator",
+    "Status": "Active",
+    "PeoplePartnerId": 1,
+    "OutOfOfficeBalance": 15,
+    "Photo": "http://example.com/photo2.jpg",
+    "LeaveRequests": [],
+    "ApprovalRequests": []
+  }
+]

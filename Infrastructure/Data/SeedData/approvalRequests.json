@@ -1,0 +1,14 @@
+[
+  {
+    "LeaveRequestId": 1,
+    "ApproverId": 1,
+    "Status": "New",
+    "Comment": "Please review the leave request."
+  },
+  {
+    "LeaveRequestId": 2,
+    "ApproverId": 2,
+    "Status": "New",
+    "Comment": "Need approval for extended leave."
+  }
+]
