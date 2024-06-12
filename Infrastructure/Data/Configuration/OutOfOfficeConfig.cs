@@ -19,13 +19,14 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .HasForeignKey(e => e.PeoplePartnerId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        /*
         builder.HasMany(e => e.LeaveRequests)
             .WithOne(lr => lr.Employee)
             .HasForeignKey(lr => lr.EmployeeId);
 
         builder.HasMany(e => e.ApprovalRequests)
             .WithOne(ar => ar.Approver)
-            .HasForeignKey(ar => ar.ApproverId);
+            .HasForeignKey(ar => ar.ApproverId);*/
     }
 }
 
@@ -39,9 +40,9 @@ public class LeaveRequestConfiguration : IEntityTypeConfiguration<LeaveRequest>
         builder.Property(lr => lr.EndDate).IsRequired();
         builder.Property(lr => lr.Status).IsRequired();
 
-        builder.HasMany(lr => lr.ApprovalRequests)
+        /*builder.HasMany(lr => lr.ApprovalRequests)
             .WithOne(ar => ar.LeaveRequest)
-            .HasForeignKey(ar => ar.LeaveRequestId);
+            .HasForeignKey(ar => ar.LeaveRequestId);*/
     }
 }
 
@@ -56,10 +57,10 @@ public class ApprovalRequestConfiguration : IEntityTypeConfiguration<ApprovalReq
         builder.Property(ar => ar.Status).IsRequired(); // Устанавливаем, что статус обязателен
 
         // Определяем связь сущности ApprovalRequest с LeaveRequest
-        builder.HasOne(ar => ar.LeaveRequest)
+        /*builder.HasOne(ar => ar.LeaveRequest)
             .WithMany(lr => lr.ApprovalRequests) // Один ApprovalRequest может иметь много LeaveRequests
             .HasForeignKey(ar => ar.LeaveRequestId) // Устанавливаем внешний ключ
-            .OnDelete(DeleteBehavior.Restrict); 
+            .OnDelete(DeleteBehavior.Restrict); */
     }
 }
 

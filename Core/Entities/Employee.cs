@@ -23,15 +23,13 @@ public class Employee
     [ForeignKey("PeoplePartner")]
     public int PeoplePartnerId { get; set; }
     
-    public Employee PeoplePartner { get; set; }
+    public Employee? PeoplePartner { get; set; }
     
     [Required]
     public int OutOfOfficeBalance { get; set; }
     
     public string Photo { get; set; }
     
-    public ICollection<LeaveRequest> LeaveRequests { get; set; }
-    public ICollection<ApprovalRequest> ApprovalRequests { get; set; }
 }
 
 public enum EmployeeStatus

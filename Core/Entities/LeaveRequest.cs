@@ -28,7 +28,6 @@ public class LeaveRequest
     [Required]
     public LeaveRequestStatus Status { get; set; } = LeaveRequestStatus.New;
     
-    public ICollection<ApprovalRequest> ApprovalRequests { get; set; }
 }
 
 public enum LeaveRequestStatus
