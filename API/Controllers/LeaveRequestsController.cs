@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Dtos;
 using AutoMapper;
+using Core.Specifications;
 
 namespace API.Controllers
 {
@@ -20,10 +21,12 @@ namespace API.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<LeaveRequestToDto>>> GetLeaveRequests()
+        public async Task<ActionResult<IReadOnlyList<LeaveRequestToDto>>> GetLeaveRequests([FromQuery] LeaveRequestSpecParams leaveRequestParams)
         {
-            var leaveRequests = await _contextRepo.ListAllAsync();
+            var spec = new LeaveRequestSpecification(leaveRequestParams);
+            var leaveRequests = await _contextRepo.ListAsync(spec);
             var leaveRequestDtos = _mapper.Map<IReadOnlyList<LeaveRequestToDto>>(leaveRequests);
+
             return Ok(leaveRequestDtos);
         }
         

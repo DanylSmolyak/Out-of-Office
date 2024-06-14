@@ -2,6 +2,7 @@ using API.Dtos;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -18,11 +19,12 @@ public class ProjectsController : BaseApiController
     }
     
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<ProjectToReturnDto>>> GetProjects()
+    public async Task<ActionResult<IReadOnlyList<ProjectToReturnDto>>> GetProjects([FromQuery] ProjectSpecParams projectParams)
     {
-        var projects = await _contextRepo.ListAllAsync();
+        var spec = new ProjectSpecifications(projectParams);
+        var projects = await _contextRepo.ListAsync(spec);
         var projectsDtos = _mapper.Map<IReadOnlyList<ProjectToReturnDto>>(projects);
-            
+
         return Ok(projectsDtos);
     }
     

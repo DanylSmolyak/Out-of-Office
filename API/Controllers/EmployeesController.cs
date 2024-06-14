@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Dtos;
 using AutoMapper;
+using Core.Specifications;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace API.Controllers
@@ -21,9 +22,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<EmployeeToReturnDto>>> GetEmployees()
+        public async Task<ActionResult<IReadOnlyList<EmployeeToReturnDto>>> GetEmployees([FromQuery] EmploySpecParams EmploySpecParams)
         {
-            var employees = await _contextRepo.ListAllAsync();
+            var spec = new EmployeeSpecifications(EmploySpecParams);
+            var employees = await _contextRepo.ListAsync(spec);
             var employeeDtos = _mapper.Map<IReadOnlyList<EmployeeToReturnDto>>(employees);
             return Ok(employeeDtos);
         }
@@ -43,16 +45,20 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddEmployee(Employee employee)
+        public async Task<ActionResult<EmployeeToReturnDto>> AddEmployee(EmployeeToReturnDto employeeDto)
         {
-            if (employee == null)
+            if (employeeDto == null)
             {
-                return BadRequest("Employee cannot be null");
+                return BadRequest("Employee data is invalid");
             }
 
+            var employee = _mapper.Map<Employee>(employeeDto);
+
             await _contextRepo.AddAsync(employee);
-            var employeeDto = _mapper.Map<EmployeeToReturnDto>(employee);
-            return CreatedAtAction(nameof(GetEmployee), new { id = employee.Id }, employeeDto);
+
+            var createdEmployeeDto = _mapper.Map<EmployeeToReturnDto>(employee);
+
+            return CreatedAtAction(nameof(GetEmployee), new { id = employee.Id }, createdEmployeeDto);
         }
 
         [HttpPut("{id}")]

@@ -2,6 +2,7 @@ using API.Dtos;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specifications;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,13 +19,15 @@ public class ApprovalRequestsController : BaseApiController
         _mapper = mapper;
     }
     
-      [HttpGet]
-      public async Task<ActionResult<IReadOnlyList<ApprovalRequstToDto>>> GetApprovalRequests()
-      {
-          var  approvalRequests = await _contextRepo.ListAllAsync();
-          var approvalRequestsDtos = _mapper.Map<IReadOnlyList<ApprovalRequstToDto>>(approvalRequests);     
-          return Ok(approvalRequestsDtos);
-      }
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<ApprovalRequstToDto>>> GetApprovalRequests([FromQuery] ApprovalRequstSpecParams approvalRequestParams)
+    {
+        var spec = new ApprovalRequestSpecification(approvalRequestParams);
+        var approvalRequests = await _contextRepo.ListAsync(spec);
+        var approvalRequestDtos = _mapper.Map<IReadOnlyList<ApprovalRequstToDto>>(approvalRequests);
+
+        return Ok(approvalRequestDtos);
+    }
             
       [HttpGet("{id}")]
       public async Task<ActionResult<ApprovalRequstToDto>> GetApprovalRequest(int id) {
