@@ -7,9 +7,10 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<Employee, EmployeeToReturnDto>();
-        
-        
+        CreateMap<Employee, EmployeeToReturnDto>()
+            .ForMember(dest => dest.PeoplePartnerId, opt => opt.MapFrom(src => src.PeoplePartnerId));
+        CreateMap<EmployeeToReturnDto, Employee>();
+            
         CreateMap<LeaveRequest, LeaveRequestToDto>()
             .ForMember(d => d.EmployeeId, o => o.MapFrom(s => s.EmployeeId));
         CreateMap<LeaveRequestToDto, LeaveRequest>();
