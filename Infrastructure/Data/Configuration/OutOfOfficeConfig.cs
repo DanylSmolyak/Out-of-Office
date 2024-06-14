@@ -56,11 +56,12 @@ public class ApprovalRequestConfiguration : IEntityTypeConfiguration<ApprovalReq
 
         builder.Property(ar => ar.Status).IsRequired(); // Устанавливаем, что статус обязателен
 
-        // Определяем связь сущности ApprovalRequest с LeaveRequest
-        /*builder.HasOne(ar => ar.LeaveRequest)
-            .WithMany(lr => lr.ApprovalRequests) // Один ApprovalRequest может иметь много LeaveRequests
-            .HasForeignKey(ar => ar.LeaveRequestId) // Устанавливаем внешний ключ
-            .OnDelete(DeleteBehavior.Restrict); */
+
+       
+        builder.HasOne(ar => ar.LeaveRequest)
+            .WithOne(lr => lr.ApprovalRequest) // Связь один к одному
+            .HasForeignKey<ApprovalRequest>(ar => ar.LeaveRequestId) // Устанавливаем внешний ключ
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
 

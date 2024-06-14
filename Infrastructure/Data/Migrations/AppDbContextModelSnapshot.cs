@@ -47,7 +47,8 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasIndex("ApproverId");
 
-                    b.HasIndex("LeaveRequestId");
+                    b.HasIndex("LeaveRequestId")
+                        .IsUnique();
 
                     b.ToTable("ApprovalRequests");
                 });
@@ -165,14 +166,14 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.ApprovalRequest", b =>
                 {
                     b.HasOne("Core.Entities.Employee", "Approver")
-                        .WithMany("ApprovalRequests")
+                        .WithMany()
                         .HasForeignKey("ApproverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Core.Entities.LeaveRequest", "LeaveRequest")
-                        .WithMany("ApprovalRequests")
-                        .HasForeignKey("LeaveRequestId")
+                        .WithOne("ApprovalRequest")
+                        .HasForeignKey("Core.Entities.ApprovalRequest", "LeaveRequestId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -195,7 +196,7 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.LeaveRequest", b =>
                 {
                     b.HasOne("Core.Entities.Employee", "Employee")
-                        .WithMany("LeaveRequests")
+                        .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -214,16 +215,10 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("ProjectManager");
                 });
 
-            modelBuilder.Entity("Core.Entities.Employee", b =>
-                {
-                    b.Navigation("ApprovalRequests");
-
-                    b.Navigation("LeaveRequests");
-                });
-
             modelBuilder.Entity("Core.Entities.LeaveRequest", b =>
                 {
-                    b.Navigation("ApprovalRequests");
+                    b.Navigation("ApprovalRequest")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

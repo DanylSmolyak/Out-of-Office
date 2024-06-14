@@ -28,6 +28,8 @@ public class LeaveRequest
     [Required]
     public LeaveRequestStatus Status { get; set; } = LeaveRequestStatus.New;
     
+    public ApprovalRequest ApprovalRequest { get; set; }
+    
 }
 
 public enum LeaveRequestStatus

@@ -120,7 +120,8 @@ namespace Infrastructure.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ApprovalRequests_LeaveRequestId",
                 table: "ApprovalRequests",
-                column: "LeaveRequestId");
+                column: "LeaveRequestId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_PeoplePartnerId",
