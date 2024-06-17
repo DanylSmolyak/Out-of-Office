@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Add Leave Request</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="employeeId" class="form-label">Employee</label>
+      <select class="form-select" id="employeeId" required [(ngModel)]="newLeaveRequest.employeeId" name="employeeId">
+        <option value="">Select Employee</option>
+        <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.fullName }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="startDate" class="form-label">Start Date</label>
+      <input type="date" class="form-control" id="startDate" required [(ngModel)]="newLeaveRequest.startDate" name="startDate">
+    </div>
+    <div class="mb-3">
+      <label for="endDate" class="form-label">End Date</label>
+      <input type="date" class="form-control" id="endDate" required [(ngModel)]="newLeaveRequest.endDate" name="endDate">
+    </div>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-select" id="status" required [(ngModel)]="newLeaveRequest.status" name="status">
+        <option value="0">New</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="absenceReason" class="form-label">Absence Reason</label>
+      <select class="form-select" id="absenceReason" required [(ngModel)]="newLeaveRequest.absenceReason" name="absenceReason">
+        <option value="">Select Absence Reason</option>
+        <option *ngFor="let leaveRequest of leaveRequests" [value]="leaveRequest.absenceReason">{{ leaveRequest.absenceReason }}</option>
+      </select>
+      <small class="form-text text-muted">Or enter new absence reason:</small>
+      <input type="text" class="form-control" id="newAbsenceReason" [(ngModel)]="newLeaveRequest.absenceReason" name="newAbsenceReason">
+    </div>
+    <div class="mb-3">
+      <label for="comment" class="form-label">Comment</label>
+      <input type="text" class="form-control" id="comment" required [(ngModel)]="newLeaveRequest.comment" name="comment">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

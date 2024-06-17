@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Edit Leave Request</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="employeeId" class="form-label">Employee</label>
+      <select class="form-select" id="employeeId" required [(ngModel)]="leaveRequest.employeeId" name="employeeId">
+        <option value="">Select Employee</option>
+        <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.fullName }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="startDate" class="form-label">Start Date</label>
+      <input type="date" class="form-control" id="startDate" required [(ngModel)]="leaveRequest.startDate" name="startDate">
+    </div>
+    <div class="mb-3">
+      <label for="endDate" class="form-label">End Date</label>
+      <input type="date" class="form-control" id="endDate" required [(ngModel)]="leaveRequest.endDate" name="endDate">
+    </div>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-select" id="status" required [(ngModel)]="leaveRequest.status" name="status">
+        <option value="0">New</option>
+        <option value="1">Submit</option>
+        <option value="2">Cancel</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="absenceReason" class="form-label">Absence Reason</label>
+      <select class="form-select" id="absenceReason" required [(ngModel)]="leaveRequest.absenceReason" name="absenceReason">
+        <option value="">Select Absence Reason</option>
+        <option *ngFor="let reason of leaveRequests" [value]="reason.absenceReason">{{ reason.absenceReason }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="comment" class="form-label">Comment</label>
+      <input type="text" class="form-control" id="comment" required [(ngModel)]="leaveRequest.comment" name="comment">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

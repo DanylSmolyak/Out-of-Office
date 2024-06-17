@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>Add Approval Request</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="approverId" class="form-label">Approver Id</label>
+      <select class="form-select" id="approverId" required [(ngModel)]="approvalRequest.approverId" name="approverId">
+        <option value="">Select Approver</option>
+        <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.fullName }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="leaveRequestId" class="form-label">Leave Request Id</label>
+      <select class="form-select" id="leaveRequestId" required [(ngModel)]="approvalRequest.leaveRequestId" name="leaveRequestId">
+        <option value="">Select Leave Request</option>
+        <option *ngFor="let request of leaveRequests" [value]="request.id">{{ request.id }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-select" id="status" required [(ngModel)]="approvalRequest.status" name="status">
+        <option value="0">Active</option>
+        <option value="1">Inactive</option>
+        <option value="2">Cancelled</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="comment" class="form-label">Comment</label>
+      <input type="text" class="form-control" id="comment" required [(ngModel)]="approvalRequest.comment" name="comment">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

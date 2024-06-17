@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Add Project</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="projectType" class="form-label">Project Type</label>
+      <select class="form-select" id="projectType" required [(ngModel)]="project.projectType" name="projectType">
+        <option value="">Select Project Type</option>
+        <option *ngFor="let project of projects" [value]="project.projectType">{{ project.projectType }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="startDate" class="form-label">Start Date</label>
+      <input type="date" class="form-control" id="startDate" required [(ngModel)]="project.startDate" name="startDate">
+    </div>
+    <div class="mb-3">
+      <label for="endDate" class="form-label">End Date</label>
+      <input type="date" class="form-control" id="endDate" required [(ngModel)]="project.endDate" name="endDate">
+    </div>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-control" id="status" required [(ngModel)]="project.status" name="status">
+        <option value="0">Active</option>
+        <option value="1">Inactive</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="projectManagerId" class="form-label">Project Manager</label>
+      <select class="form-select" id="projectManagerId" required [(ngModel)]="project.projectManagerId" name="projectManagerId">
+        <option value="">Select Project Manager</option>
+        <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.fullName }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="comment" class="form-label">Comment</label>
+      <input type="text" class="form-control" id="comment" required [(ngModel)]="project.comment" name="comment">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

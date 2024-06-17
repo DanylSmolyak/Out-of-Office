@@ -1,0 +1,52 @@
+  <div class="container">
+    <h2>Add Employee</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="fullName" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="fullName" required [(ngModel)]="newEmployee.fullName" name="fullName">
+      </div>
+      <div class="mb-3">
+        <label for="subdivision" class="form-label">Subdivision</label>
+        <select class="form-select" id="subdivision" [(ngModel)]="newEmployee.subdivision" name="subdivision">
+          <option value="">Select Subdivision</option>
+          <option *ngFor="let employee of employees" [value]="employee.subdivision">{{ employee.subdivision }}</option>
+        </select>
+        <small class="form-text text-muted">Or enter new subdivision:</small>
+        <input type="text" class="form-control" id="newSubdivision" [(ngModel)]="newEmployee.subdivision" name="newSubdivision">
+      </div>
+      <div class="mb-3">
+        <label for="position" class="form-label">Position</label>
+        <select class="form-select" id="position" required [(ngModel)]="newEmployee.position" name="position">
+          <option value="">Select Position</option>
+          <option *ngFor="let employee of employees" [value]="employee.position">{{ employee.position }}</option>
+        </select>
+        <small class="form-text text-muted">Or enter new position:</small>
+        <input type="text" class="form-control" id="newPosition" [(ngModel)]="newEmployee.position" name="newPosition">
+      </div>
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-control" id="status" required [(ngModel)]="newEmployee.status" name="status">
+          <option value="0">Active</option>
+          <option value="1">Inactive</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="peoplePartnerId" class="form-label">People Partner ID</label>
+        <select class="form-select" id="peoplePartnerId" required [(ngModel)]="newEmployee.peoplePartnerId" name="peoplePartnerId">
+          <option value="">Select People Partner</option>
+          <option *ngFor="let employee of employees" [value]="employee.id">{{ employee.fullName }}</option>
+        </select>
+        <small class="form-text text-muted">Or enter new People Partner ID:</small>
+        <input type="number" class="form-control" id="newPeoplePartnerId" [(ngModel)]="newEmployee.peoplePartnerId" name="newPeoplePartnerId">
+      </div>
+      <div class="mb-3">
+        <label for="outOfOfficeBalance" class="form-label">Out Of Office Balance</label>
+        <input type="number" class="form-control" id="outOfOfficeBalance" required [(ngModel)]="newEmployee.outOfOfficeBalance" name="outOfOfficeBalance">
+      </div>
+      <div class="mb-3">
+        <label for="photo" class="form-label">Photo URL</label>
+        <input type="text" class="form-control" id="photo" required [(ngModel)]="newEmployee.photo" name="photo">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>

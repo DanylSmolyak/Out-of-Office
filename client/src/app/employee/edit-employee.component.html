@@ -1,0 +1,46 @@
+<div class="container">
+  <h2>Edit Employee</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="fullName" class="form-label">Full Name</label>
+      <input type="text" class="form-control" id="fullName" required [(ngModel)]="employee.fullName" name="fullName">
+    </div>
+    <div class="mb-3">
+      <label for="subdivision" class="form-label">Subdivision</label>
+      <select class="form-select" id="subdivision" [(ngModel)]="employee.subdivision" name="subdivision">
+        <option value="">Select Subdivision</option>
+        <option *ngFor="let employee of employees" [value]="employee.subdivision">{{ employee.subdivision }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="position" class="form-label">Position</label>
+      <select class="form-select" id="position" required [(ngModel)]="employee.position" name="position">
+        <option value="">Select Position</option>
+        <option *ngFor="let position of employees" [value]="employee.position">{{ employee.position }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-control" id="status" required [(ngModel)]="employee.status" name="status">
+        <option value="0">Active</option>
+        <option value="1">Inactive</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="peoplePartnerId" class="form-label">People Partner</label>
+      <select class="form-select" id="peoplePartnerId" required [(ngModel)]="employee.peoplePartnerId" name="peoplePartnerId">
+        <option value="">Select People Partner</option>
+        <option *ngFor="let emp of employees" [value]="emp.id">{{ emp.fullName }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="outOfOfficeBalance" class="form-label">Out Of Office Balance</label>
+      <input type="number" class="form-control" id="outOfOfficeBalance" required [(ngModel)]="employee.outOfOfficeBalance" name="outOfOfficeBalance">
+    </div>
+    <div class="mb-3">
+      <label for="photo" class="form-label">Photo URL</label>
+      <input type="text" class="form-control" id="photo" required [(ngModel)]="employee.photo" name="photo">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Leave Requests</h1>
+    <button class="btn btn-primary ms-5" routerLink="/add-leave-requests">Add Leave Request</button>
+  </div>
+
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="searchTerm" (ngModelChange)="onSearch()">
+    <button class="btn btn-outline-secondary" type="button" (click)="onSearch()">Search</button>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-6">
+      <h5 class="text-dark">Status</h5>
+      <select class="form-select" (change)="onStatusFilterChange($event)">
+        <option value="">All</option>
+        <option value="0">New</option>
+        <option value="1">Submit</option>
+        <option value="2">Cancel</option>
+      </select>
+    </div>
+    <div class="col-6">
+      <h5 class="text-dark">Sort By</h5>
+      <select class="form-select" (change)="onSortChange($event)">
+        <option *ngFor="let sort of sortOptions" [value]="sort.value">{{ sort.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-3 text-center">
+    <div class="col-4 themed-grid-col" *ngFor="let leaveRequest of leaveRequests">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ findEmployeeFullName(leaveRequest.employeeId) }}</h5>
+          <p class="card-text">Start Date: {{ leaveRequest.startDate }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">End Date: {{ leaveRequest.endDate }}</li>
+          <li class="list-group-item" [ngClass]="getStatusClass(leaveRequest.status)">Status: {{ getStatusText(leaveRequest.status) }}</li>
+          <li class="list-group-item">Absence Reason: {{ leaveRequest.absenceReason }}</li>
+          <li class="list-group-item">Comment: {{ leaveRequest.comment }}</li>
+        </ul>
+        <div class="card-body">
+          <button class="btn btn-primary" [routerLink]="'/leave-requests/edit-leave-requests/' + leaveRequest.id">Edit project</button>
+          <button (click)="deleteLeaveRequest(leaveRequest.id)" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
