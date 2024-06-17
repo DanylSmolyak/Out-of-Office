@@ -30,6 +30,6 @@ public class Project
 
 public enum ProjectStatus
 {
-    Active,
-    Inactive
+    Active = 0,
+    Inactive = 1
 }

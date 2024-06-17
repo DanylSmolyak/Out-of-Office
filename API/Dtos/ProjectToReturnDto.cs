@@ -4,6 +4,7 @@ namespace API.Dtos;
 
 public class ProjectToReturnDto
 {
+    public int Id { get; set; }
     public string ProjectType { get; set; }
     
     public DateTime StartDate { get; set; }
@@ -14,5 +15,5 @@ public class ProjectToReturnDto
     
     public string Comment { get; set; }
     
-    public ProjectStatus Status { get; set; }
+    public int Status { get; set; }
 }

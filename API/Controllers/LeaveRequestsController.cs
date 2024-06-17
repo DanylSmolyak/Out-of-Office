@@ -13,11 +13,13 @@ namespace API.Controllers
     {
         private readonly IGenericRepository<LeaveRequest> _contextRepo;
         private readonly IMapper _mapper;
+        private readonly ILeaveRequestService _leaveRequestService;
 
-        public LeaveRequestsController(IGenericRepository<LeaveRequest> contextRepo, IMapper mapper)
+        public LeaveRequestsController(IGenericRepository<LeaveRequest> contextRepo, IMapper mapper, ILeaveRequestService leaveRequestService)
         {
             _contextRepo = contextRepo;
             _mapper = mapper;
+            _leaveRequestService = leaveRequestService;
         }
         
         [HttpGet]
@@ -50,10 +52,6 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<LeaveRequestToDto>> AddLeaveRequest(LeaveRequestToDto leaveRequestDto)
         {
-            if (leaveRequestDto == null)
-            {
-                return BadRequest("LeaveRequest cannot be null");
-            }
 
             var leaveRequest = _mapper.Map<LeaveRequest>(leaveRequestDto);
             await _contextRepo.AddAsync(leaveRequest);
@@ -65,12 +63,45 @@ namespace API.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateLeaveRequest(int id, LeaveRequest leaveRequest)
+        public async Task<ActionResult> UpdateLeaveRequest(int id, LeaveRequestToDto leaveRequestDto)
         {
+            var leaveRequest = await _contextRepo.GetByIdAsync(id);
+            if (leaveRequest == null)
+            {
+                return NotFound();
+            }
+
+            // Map updated properties from DTO to entity
+            _mapper.Map(leaveRequestDto, leaveRequest);
+
+            // Explicitly set EmployeeID if needed
+            leaveRequest.EmployeeId = leaveRequestDto.EmployeeId;
+
             await _contextRepo.UpdateAsync(leaveRequest);
+
+            // Check if the leave request status should be approved or canceled
+            if (leaveRequest.Status == LeaveRequestStatus.Submit)
+            {
+                var result = await _leaveRequestService.HandleLeaveRequestAsync(id, true);
+
+                if (!result)
+                {
+                    return BadRequest("Failed to approve leave request.");
+                }
+            }
+            else if (leaveRequest.Status == LeaveRequestStatus.Cancel)
+            {
+                var result = await _leaveRequestService.HandleLeaveRequestAsync(id, false);
+
+                if (!result)
+                {
+                    return BadRequest("Failed to cancel leave request.");
+                }
+            }
+
             return NoContent();
         }
-        
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteLeaveRequest(int id)
         {

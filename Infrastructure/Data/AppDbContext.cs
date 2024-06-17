@@ -14,11 +14,12 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
         modelBuilder.ApplyConfiguration(new LeaveRequestConfiguration());
         modelBuilder.ApplyConfiguration(new ApprovalRequestConfiguration());
-        modelBuilder.ApplyConfiguration(new ProjectConfiguration());
+
     }
 
     public DbSet<Employee> Employees { get; set; }
     public DbSet<LeaveRequest> LeaveRequests { get; set; }
     public DbSet<ApprovalRequest> ApprovalRequests { get; set; }
     public DbSet<Project> Projects { get; set; }
+
 }

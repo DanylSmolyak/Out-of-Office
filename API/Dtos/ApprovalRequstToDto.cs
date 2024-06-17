@@ -4,11 +4,12 @@ namespace API.Dtos;
 
 public class ApprovalRequstToDto
 {
+    public int Id { get; set; }
     public int ApproverId { get; set; }
     
     public int LeaveRequestId { get; set; }
     
-    public ApprovalStatus Status { get; set; } = ApprovalStatus.New;
+    public int Status { get; set; }
     
     public string Comment { get; set; }
 }

@@ -141,3 +141,5 @@ C:\Users\smola\OutofOfficeApp\API\obj\Debug\net8.0\ref\API.dll
 C:\Users\smola\OutofOfficeApp\API\obj\Debug\net8.0\API.sourcelink.json
 C:\Users\smola\OutofOfficeApp\API\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\smola\OutofOfficeApp\API\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\smola\OutofOfficeApp\API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\smola\OutofOfficeApp\API\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

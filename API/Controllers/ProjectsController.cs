@@ -54,9 +54,18 @@ public class ProjectsController : BaseApiController
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateProject(int id, Project project)
+    public async Task<ActionResult> UpdateProject(int id, ProjectToReturnDto projectDto)
     {
-        await _contextRepo.UpdateAsync(project);
+        if (id != projectDto.Id)
+        {
+            return BadRequest("Project ID mismatch");
+        }
+
+        var existingProject = await _contextRepo.GetByIdAsync(id);
+
+        _mapper.Map(projectDto, existingProject);
+        await _contextRepo.UpdateAsync(existingProject);
+
         return NoContent();
     }
         

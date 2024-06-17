@@ -59,9 +59,24 @@ public class ApprovalRequestsController : BaseApiController
       }
     
       [HttpPut("{id}")]
-      public async Task<ActionResult> UpdateApprovalRequest(int id, ApprovalRequest approvalRequest)
+      public async Task<ActionResult> UpdateApprovalRequest(int id, ApprovalRequstToDto approvalRequestDto)
       {
+          if (id != approvalRequestDto.Id)
+          {
+              return BadRequest("ID mismatch");
+          }
+
+          var approvalRequest = await _contextRepo.GetByIdAsync(id);
+
+          if (approvalRequest == null)
+          {
+              return NotFound();
+          }
+
+          _mapper.Map(approvalRequestDto, approvalRequest);
+
           await _contextRepo.UpdateAsync(approvalRequest);
+
           return NoContent();
       }
       

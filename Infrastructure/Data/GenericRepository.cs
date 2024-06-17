@@ -31,6 +31,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
     public async Task UpdateAsync(T entity)
     {
+        _context.Set<T>().Attach(entity);
         _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
@@ -60,5 +61,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
     }
+    
+
     
 }

@@ -34,7 +34,7 @@ public class LeaveRequest
 
 public enum LeaveRequestStatus
 {
-    New,
-    Submitted,
-    Cancelled
+    New=0,
+    Submit = 1 ,
+    Cancel = 2 
 }

@@ -11,6 +11,7 @@ public class EmployeeSpecifications : BaseSpecification<Employee>
         )
     {
         ApplySorting(employeeParams.Sort);
+
     }
     
     private void ApplySorting(string sort)

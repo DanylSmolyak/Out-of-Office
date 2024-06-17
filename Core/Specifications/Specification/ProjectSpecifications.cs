@@ -10,7 +10,7 @@ public class ProjectSpecifications : BaseSpecification<Project>
         )
     {
         ApplySorting(projectsParams.Sort);
-        ApplyPaging(projectsParams.PageIndex * projectsParams.PageSize, projectsParams.PageSize); // Пагинация
+
     }
 
     private void ApplySorting(string sort)

@@ -21,7 +21,7 @@ public class ApprovalRequest
     public LeaveRequest LeaveRequest { get; set; }
     
     [Required]
-    public ApprovalStatus Status { get; set; } = ApprovalStatus.New;
+    public ApprovalStatus Status { get; set; }
     
     public string Comment { get; set; }
 }
